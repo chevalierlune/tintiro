@@ -7,69 +7,69 @@
 #define _CRT_SECURE_NO_WARNINGS
 #define PI 3.14159
 
-//Dice‚МЌ\‘ў‘М
+//DiceгЃ®ж§‹йЂ дЅ“
 typedef struct 
 {
     double RotAngleX;
     double RotAngleY;
     double RotAngleZ;
-    double Speed; // ‰с“]‘¬“x
-    int Animation; // 0:ѓIѓtЃA1:ѓIѓ“
-    int targetFace; // –Ъ•W‚М–КЃi1Ѓ`6Ѓj
-    int directionX; // XЋІ‰с“]•ыЊь: 1 or -1
-    int directionY; // YЋІ‰с“]•ыЊь: 1 or -1
-    int directionZ; // ZЋІ‰с“]•ыЊь: 1 or -1
+    double Speed; // е›ћи»ўйЂџеє¦
+    int Animation; // 0:г‚Єгѓ•гЂЃ1:г‚Єгѓі
+    int targetFace; // з›®жЁ™гЃ®йќўпј€1пЅћ6пј‰
+    int directionX; // Xи»ёе›ћи»ўж–№еђ‘: 1 or -1
+    int directionY; // Yи»ёе›ћи»ўж–№еђ‘: 1 or -1
+    int directionZ; // Zи»ёе›ћи»ўж–№еђ‘: 1 or -1
 } Dice;
 
-Dice dice[3]; // 3‚В‚МѓTѓCѓRѓЌ
+Dice dice[3]; // 3гЃ¤гЃ®г‚µг‚¤г‚ігѓ­
 
-// Ћ‹“_‚МЌА•W‚рѓOѓЌЃ[ѓoѓ‹•Пђ”‚Ж‚µ‚ДђйЊѕ
+// и¦–з‚№гЃ®еє§жЁ™г‚’г‚°гѓ­гѓјгѓђгѓ«е¤‰ж•°гЃЁгЃ—гЃ¦е®ЈиЁЂ
 double eyeX = 0.0, eyeY = 0.0, eyeZ = 12.0;
 double centerX = 0.0, centerY = 0.0, centerZ = 0.0;
 double P = 0.05;
 
-// ѓXѓ^Ѓ[ѓgѓ{ѓ^ѓ“‚Жѓxѓbѓgѓ{ѓ^ѓ“‚М€К’u‚ЖѓTѓCѓY
+// г‚№г‚їгѓјгѓ€гѓњг‚їгѓігЃЁгѓ™гѓѓгѓ€гѓњг‚їгѓігЃ®дЅЌзЅ®гЃЁг‚µг‚¤г‚є
 float buttonX = -0.2, buttonY = -0.7, buttonWidth = 0.4, buttonHeight = 0.2;
 float betButtonX = -0.2, betButtonY = -0.4, betButtonWidth = 0.4, betButtonHeight = 0.2;
 
-// ѓTѓCѓRѓЌ‚М’вЋ~–К‚р•Ы‘¶‚·‚й•Пђ”
+// г‚µг‚¤г‚ігѓ­гЃ®еЃњж­ўйќўг‚’дїќе­гЃ™г‚‹е¤‰ж•°
 char diceStatus[3][50];
 
-// ЏЉЋќ‹а‚ЖѓxѓbѓgЉz‚МЏ‰Љъ’l
+// ж‰ЂжЊЃй‡‘гЃЁгѓ™гѓѓгѓ€йЎЌгЃ®е€ќжњџеЂ¤
 int money = 100;
 int bet = 0;
 
-// Љe–К‚М–Ъ•WЉp“x‚рђЭ’и‚·‚йЉЦђ”
+// еђ„йќўгЃ®з›®жЁ™и§’еє¦г‚’иЁ­е®љгЃ™г‚‹й–ўж•°
 void setTargetAngles(int face, double* angleX, double* angleY, double* angleZ) 
 {
     switch (face) 
     {
-    case 1: // 1‚М–К‚ЄЏг‚Й—€‚й
+    case 1: // 1гЃ®йќўгЃЊдёЉгЃ«жќҐг‚‹
         *angleX = 0.0;
         *angleY = 90.0;
         *angleZ = 0.0;
         break;
-    case 2: // 2‚М–К‚ЄЏг‚Й—€‚й
+    case 2: // 2гЃ®йќўгЃЊдёЉгЃ«жќҐг‚‹
         *angleX = 180.0;
         *angleY = 0.0;
         *angleZ = 0.0;
         break;
-    case 3: // 3‚М–К‚ЄЏг‚Й—€‚й
+    case 3: // 3гЃ®йќўгЃЊдёЉгЃ«жќҐг‚‹
         *angleX = 90.0;
         *angleY = 0.0;
         *angleZ = 0.0;
         break;
-    case 4: // 4‚М–К‚ЄЏг‚Й—€‚й
+    case 4: // 4гЃ®йќўгЃЊдёЉгЃ«жќҐг‚‹
         *angleX = -90.0;
         *angleY = 0.0;
         *angleZ = 0.0;
         break;
-    case 5: // 5‚М–К‚ЄЏг‚Й—€‚й
+    case 5: // 5гЃ®йќўгЃЊдёЉгЃ«жќҐг‚‹
         *angleX = 0.0;
         *angleY = 0.0;
         *angleZ = 0.0;
         break;
-    case 6: // 6‚М–К‚ЄЏг‚Й—€‚й
+    case 6: // 6гЃ®йќўгЃЊдёЉгЃ«жќҐг‚‹
         *angleX = 0.0;
         *angleY = -90.0;
         *angleZ = 0.0;
@@ -77,48 +77,48 @@ void setTargetAngles(int face, double* angleX, double* angleY, double* angleZ)
     }
 }
 
-// Џ‰Љъ‰»ЉЦђ”
+// е€ќжњџеЊ–й–ўж•°
 void init(void)
 {
-    srand((unsigned int)time(NULL));  // ѓ‰ѓ“ѓ_ѓЂѓVЃ[ѓh‚рЏ‰Љъ‰»
+    srand((unsigned int)time(NULL));  // гѓ©гѓігѓЂгѓ г‚·гѓјгѓ‰г‚’е€ќжњџеЊ–
     for (int i = 0; i < 3; i++) 
     {
         dice[i].RotAngleX = 0.0;
         dice[i].RotAngleY = 0.0;
         dice[i].RotAngleZ = 0.0;
-        dice[i].Speed = (rand() % 10 + 5) * 2; // ѓ‰ѓ“ѓ_ѓЂ‚И‘¬“xђЭ’иЃi10.0 - 30.0Ѓj
-        dice[i].Animation = 0; // ѓAѓjѓЃЃ[ѓVѓ‡ѓ“ѓIѓt
-        dice[i].targetFace = 1; // Џ‰Љъ–Ъ•W–К
-        dice[i].directionX = (rand() % 2) * 2 - 1; // -1 ‚Ь‚Ѕ‚Н 1
-        dice[i].directionY = (rand() % 2) * 2 - 1; // -1 ‚Ь‚Ѕ‚Н 1
-        dice[i].directionZ = (rand() % 2) * 2 - 1; // -1 ‚Ь‚Ѕ‚Н 1
+        dice[i].Speed = (rand() % 10 + 5) * 2; // гѓ©гѓігѓЂгѓ гЃЄйЂџеє¦иЁ­е®љпј€10.0 - 30.0пј‰
+        dice[i].Animation = 0; // г‚ўгѓ‹гѓЎгѓјг‚·гѓ§гѓіг‚Єгѓ•
+        dice[i].targetFace = 1; // е€ќжњџз›®жЁ™йќў
+        dice[i].directionX = (rand() % 2) * 2 - 1; // -1 гЃѕгЃџгЃЇ 1
+        dice[i].directionY = (rand() % 2) * 2 - 1; // -1 гЃѕгЃџгЃЇ 1
+        dice[i].directionZ = (rand() % 2) * 2 - 1; // -1 гЃѕгЃџгЃЇ 1
         snprintf(diceStatus[i], sizeof(diceStatus[i]), "Dice %d: Face ?", i + 1);
     }
 }
 
-// –Ъ‚р•`‰ж‚·‚й‚Ѕ‚Я‚МЉЦђ”
+// з›®г‚’жЏЏз”»гЃ™г‚‹гЃџг‚ЃгЃ®й–ўж•°
 void drawDot(float x, float y, float z)
 {
     glPushMatrix();
     glTranslated(x, y, z);
-    glutSolidSphere(0.1, 20, 20); // Џ¬‚і‚И‹…‘М‚р•`‰ж
+    glutSolidSphere(0.1, 20, 20); // е°ЏгЃ•гЃЄзђѓдЅ“г‚’жЏЏз”»
     glPopMatrix();
 }
 
-// ђФ“_‚р•`‰ж‚·‚й‚Ѕ‚Я‚МЉЦђ”
+// иµ¤з‚№г‚’жЏЏз”»гЃ™г‚‹гЃџг‚ЃгЃ®й–ўж•°
 void drawDotColor(float x, float y, float z, int r, int g, int b)
 {
     glPushMatrix();
-    glColor3ub(r, g, b); // RGB’l‚рЋg‚Б‚ДђF‚рђЭ’и
+    glColor3ub(r, g, b); // RGBеЂ¤г‚’дЅїгЃЈгЃ¦и‰Іг‚’иЁ­е®љ
     glTranslated(x, y, z);
-    glutSolidSphere(0.1, 20, 20); // Џ¬‚і‚И‹…‘М‚р•`‰ж
+    glutSolidSphere(0.1, 20, 20); // е°ЏгЃ•гЃЄзђѓдЅ“г‚’жЏЏз”»
     glPopMatrix();
 }
 
-// ѓTѓCѓRѓЌ‚МЉe–К‚р•`‰ж‚·‚й‚Ѕ‚Я‚МЉЦђ”
+// г‚µг‚¤г‚ігѓ­гЃ®еђ„йќўг‚’жЏЏз”»гЃ™г‚‹гЃџг‚ЃгЃ®й–ўж•°
 void drawDiceFaces()
 {
-    // –К1 (Ќ¶‘¤–К)
+    // йќў1 (е·¦еЃґйќў)
     glPushMatrix();
     glTranslated(-0.5, 0.0, 0.0);
     glRotated(90, 0, 1, 0);
@@ -126,7 +126,7 @@ void drawDiceFaces()
     drawDotColor(0.0, 0.0, 0.0, 255, 0, 0);
     glPopMatrix();
 
-    // –К2 (”w–К)
+    // йќў2 (иѓЊйќў)
     glPushMatrix();
     glTranslated(0.0, 0.0, -0.5);
     glColor3f(0.0, 0.0, 0.0);
@@ -134,7 +134,7 @@ void drawDiceFaces()
     drawDot(0.2, 0.2, 0.0);
     glPopMatrix();
 
-    // –К3 (Џг–К)
+    // йќў3 (дёЉйќў)
     glPushMatrix();
     glTranslated(0.0, 0.5, 0.0);
     glRotated(90, 1, 0, 0);
@@ -144,7 +144,7 @@ void drawDiceFaces()
     drawDot(0.2, 0.2, 0.0);
     glPopMatrix();
 
-    // –К4 (‰є–К)
+    // йќў4 (дё‹йќў)
     glPushMatrix();
     glTranslated(0.0, -0.5, 0.0);
     glRotated(90, 1, 0, 0);
@@ -155,7 +155,7 @@ void drawDiceFaces()
     drawDot(0.2, 0.2, 0.0);
     glPopMatrix();
 
-    // –К5 (‘O–К)
+    // йќў5 (е‰Ќйќў)
     glPushMatrix();
     glTranslated(0.0, 0.0, 0.5);
     glColor3f(0.0, 0.0, 0.0);
@@ -166,7 +166,7 @@ void drawDiceFaces()
     drawDot(0.2, 0.2, 0.0);
     glPopMatrix();
 
-    // –К6 (‰E‘¤–К)
+    // йќў6 (еЏіеЃґйќў)
     glPushMatrix();
     glTranslated(0.5, 0.0, 0.0);
     glRotated(90, 0, 1, 0);
@@ -180,18 +180,18 @@ void drawDiceFaces()
     glPopMatrix();
 }
 
-// ѓTѓCѓRѓЌ‚М•`‰ж
+// г‚µг‚¤г‚ігѓ­гЃ®жЏЏз”»
 void drawDice(int index)
 {
     glPushMatrix();
     glTranslated(0.0, 0.0, 0.0);
     glColor3f(1.0, 1.0, 1.0);
-    glutSolidCube(1.0); // ѓTѓCѓRѓЌ‚М–{‘М‚р•`‰ж
-    drawDiceFaces(); // ѓTѓCѓRѓЌ‚МЉe–К‚р•`‰ж
+    glutSolidCube(1.0); // г‚µг‚¤г‚ігѓ­гЃ®жњ¬дЅ“г‚’жЏЏз”»
+    drawDiceFaces(); // г‚µг‚¤г‚ігѓ­гЃ®еђ„йќўг‚’жЏЏз”»
     glPopMatrix();
 }
 
-// ‚QЋџЊі•¶Ћљ‚р•`‰ж‚·‚йЉЦђ”
+// пј’ж¬Ўе…ѓж–‡е­—г‚’жЏЏз”»гЃ™г‚‹й–ўж•°
 void drawText(float x, float y, const char* text)
 {
     glRasterPos2f(x, y);
@@ -202,7 +202,7 @@ void drawText(float x, float y, const char* text)
     }
 }
 
-// ЏЉЋќ‹а‚р•`‰ж‚·‚йЉЦђ”
+// ж‰ЂжЊЃй‡‘г‚’жЏЏз”»гЃ™г‚‹й–ўж•°
 void drawMoney(float x, float y, int amount)
 {
     char buffer[50];
@@ -210,7 +210,7 @@ void drawMoney(float x, float y, int amount)
     drawText(x, y, buffer);
 }
 
-// ѓxѓbѓgЉz‚р•`‰ж‚·‚йЉЦђ”
+// гѓ™гѓѓгѓ€йЎЌг‚’жЏЏз”»гЃ™г‚‹й–ўж•°
 void drawBet(float x, float y, int amount)
 {
     char buffer[50];
@@ -218,51 +218,51 @@ void drawBet(float x, float y, int amount)
     drawText(x, y, buffer);
 }
 
-// ѓ{ѓ^ѓ“‚р•`‰ж‚·‚йЉЦђ”
+// гѓњг‚їгѓіг‚’жЏЏз”»гЃ™г‚‹й–ўж•°
 void drawButton(float x, float y, float width, float height, const char* label)
 {
-    glColor3f(0, 255, 255);// ѓ{ѓ^ѓ“‚МђF‚рђ…ђF‚ЙђЭ’и
+    glColor3f(0, 255, 255);// гѓњг‚їгѓігЃ®и‰Іг‚’ж°ґи‰ІгЃ«иЁ­е®љ
     glBegin(GL_QUADS);
     glVertex2f(x, y);
     glVertex2f(x + width, y);
     glVertex2f(x + width, y + height);
     glVertex2f(x, y + height);
     glEnd();
-    // ѓ{ѓ^ѓ“‚Мѓ‰ѓxѓ‹‚р•`‰ж
-    glColor3f(255, 0, 0); // ѓeѓLѓXѓg‚МђF‚рђФ‚ЙђЭ’и
-    drawText(x + width / 2 - 0.05 * strlen(label) / 3, y + height / 2 - 0.05 / 2, label);//•¶Ћљ‚МЏкЏЉ
+    // гѓњг‚їгѓігЃ®гѓ©гѓ™гѓ«г‚’жЏЏз”»
+    glColor3f(255, 0, 0); // гѓ†г‚­г‚№гѓ€гЃ®и‰Іг‚’иµ¤гЃ«иЁ­е®љ
+    drawText(x + width / 2 - 0.05 * strlen(label) / 3, y + height / 2 - 0.05 / 2, label);//ж–‡е­—гЃ®е ґж‰Ђ
 }
 
-//ѓ`ѓ“ѓ`ѓЌ‚М“ѕ“_”z•Є
+//гѓЃгѓігѓЃгѓ­гЃ®еѕ—з‚№й…Ќе€†
 int tintiro(int x, int y, int z, int bet) 
 {
-    int re;//•Ф‚µ’l
-    if (x == y && x == z && y == z) // ‚·‚Ч‚Д‚М–Ъ‚Є“Ї‚¶ЏкЌ‡
+    int re;//иї”гЃ—еЂ¤
+    if (x == y && x == z && y == z) // гЃ™гЃ№гЃ¦гЃ®з›®гЃЊеђЊгЃе ґеђ€
     { 
         if (x == 1) 
         {
-            re = 5 * bet; // 1,1,1‚Н5”{
+            re = 5 * bet; // 1,1,1гЃЇ5еЂЌ
         }
         else 
         {
-            re = 3 * bet; // ‚»‚М‘ј‚Мѓ]ѓЌ–Ъ‚Н3”{
+            re = 3 * bet; // гЃќгЃ®д»–гЃ®г‚ѕгѓ­з›®гЃЇ3еЂЌ
         }
     }
     else if ((x == 4 && y == 5 && z == 6) || (x == 4 && y == 6 && z == 5) || (x == 5 && y == 4 && z == 6) || (x == 5 && y == 6 && z == 4) || (x == 6 && y == 4 && z == 5) || (x == 6 && y == 5 && z == 4)) 
     {
-        re = 2 * bet;// 4, 5, 6 ‚МЏкЌ‡‚Н2”{
+        re = 2 * bet;// 4, 5, 6 гЃ®е ґеђ€гЃЇ2еЂЌ
     }
     else if ((x == 1 && y == 2 && z == 3) || (x == 1 && y == 3 && z == 2) || (x == 2 && y == 1 && z == 3) || (x == 2 && y == 3 && z == 1) || (x == 3 && y == 1 && z == 2) || (x == 3 && y == 2 && z == 1)) 
     {
-        re = -1 * bet;// 1, 2, 3 ‚МЏкЌ‡‚НѓxѓbѓgЉz‚рЋё‚¤
+        re = -1 * bet;// 1, 2, 3 гЃ®е ґеђ€гЃЇгѓ™гѓѓгѓ€йЎЌг‚’е¤±гЃ†
     }
     else if (x == y || y == z || z == x)
     {
-        re = bet; // “с‚В‚М–Ъ‚Є“Ї‚¶ЏкЌ‡
+        re = bet; // дєЊгЃ¤гЃ®з›®гЃЊеђЊгЃе ґеђ€
     }
     else 
     {
-        re=0; // ‚»‚М‘ј‚МЏкЌ‡
+        re=0; // гЃќгЃ®д»–гЃ®е ґеђ€
     }
     return re;
 }
@@ -273,16 +273,16 @@ void display(void)
     glLoadIdentity();
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(45.0, 1.0, 1.0, 200.0); // “§Ћ‹“Љ‰e
+    gluPerspective(45.0, 1.0, 1.0, 200.0); // йЂЏи¦–жЉ•еЅ±
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, 0.0, 1.0, 0.0);//Ћ‹“_€Ъ“®Џo—€‚й‚ж‚¤‚Й
+    gluLookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, 0.0, 1.0, 0.0);//и¦–з‚№з§»е‹•е‡єжќҐг‚‹г‚€гЃ†гЃ«
 
     glEnable(GL_DEPTH_TEST);
     for (int i = 0; i < 3; i++) 
     {
         glPushMatrix();
-        glTranslatef(i * 2.0 - 2.0, 0.0, 0.0); // 3‚В‚МѓTѓCѓRѓЌ‚р‰Ў‚Й•А‚Ч‚й
+        glTranslatef(i * 2.0 - 2.0, 0.0, 0.0); // 3гЃ¤гЃ®г‚µг‚¤г‚ігѓ­г‚’жЁЄгЃ«дё¦гЃ№г‚‹
         glRotatef(dice[i].RotAngleX, 1.0, 0.0, 0.0);
         glRotatef(dice[i].RotAngleY, 0.0, 1.0, 0.0);
         glRotatef(dice[i].RotAngleZ, 0.0, 0.0, 1.0);
@@ -291,24 +291,24 @@ void display(void)
     }
     glDisable(GL_DEPTH_TEST);
 
-    // 2D•`‰ж—p‚МђЭ’и
+    // 2DжЏЏз”»з”ЁгЃ®иЁ­е®љ
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluOrtho2D(-1.0, 1.0, -1.0, 1.0); // 2D“Љ‰e
+    gluOrtho2D(-1.0, 1.0, -1.0, 1.0); // 2DжЉ•еЅ±
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glColor3f(255, 255, 0);
-    // ЏЉЋќ‹а‚ЖѓxѓbѓgЉz‚М•`‰ж
+    // ж‰ЂжЊЃй‡‘гЃЁгѓ™гѓѓгѓ€йЎЌгЃ®жЏЏз”»
     drawMoney(-0.9, 0.9, money);
     drawBet(-0.9, -0.95, bet);
 
-    // ѓXѓ^Ѓ[ѓgѓ{ѓ^ѓ“‚М•`‰ж
+    // г‚№г‚їгѓјгѓ€гѓњг‚їгѓігЃ®жЏЏз”»
     drawButton(buttonX, buttonY, buttonWidth, buttonHeight, "START");
 
-    // ѓxѓbѓgѓ{ѓ^ѓ“‚М•`‰ж
+    // гѓ™гѓѓгѓ€гѓњг‚їгѓігЃ®жЏЏз”»
     drawButton(betButtonX, betButtonY, betButtonWidth, betButtonHeight, "BET $10");
 
-    // ѓTѓCѓRѓЌ‚М’вЋ~–К‚р•\Ћ¦
+    // г‚µг‚¤г‚ігѓ­гЃ®еЃњж­ўйќўг‚’иЎЁз¤є
     for (int i = 0; i < 3; i++) 
     {
         drawText(-0.9, 0.8 - i * 0.1, diceStatus[i]);
@@ -320,52 +320,52 @@ void display(void)
 
 void timer(int value)
 {
-    for (int i = 0; i < 3; i++) //ѓTѓCѓRѓЌ0,1,2
+    for (int i = 0; i < 3; i++) //г‚µг‚¤г‚ігѓ­0,1,2
     {
-        // ѓTѓCѓRѓЌ‚М‰с“]‚рЌXђV
+        // г‚µг‚¤г‚ігѓ­гЃ®е›ћи»ўг‚’ж›ґж–°
         if (dice[i].Animation) 
         {
             dice[i].RotAngleX += dice[i].Speed * dice[i].directionX;
             dice[i].RotAngleY += dice[i].Speed * dice[i].directionY;
             dice[i].RotAngleZ += dice[i].Speed * dice[i].directionZ;
 
-            // Џ™ЃX‚Й‘¬“x‚рЊёЏ­‚і‚№‚й
+            // еѕђгЂ…гЃ«йЂџеє¦г‚’жё›е°‘гЃ•гЃ›г‚‹
             dice[i].Speed *= 0.985;
 
-            // ‘¬“x‚Є€к’и‚Ми‡’l€И‰є‚Й‚И‚Б‚Ѕ‚з‰с“]‚р’вЋ~‚·‚й
+            // йЂџеє¦гЃЊдёЂе®љгЃ®й–ѕеЂ¤д»Ґдё‹гЃ«гЃЄгЃЈгЃџг‚‰е›ћи»ўг‚’еЃњж­ўгЃ™г‚‹
             if (dice[i].Speed < 6.0)
             {
                 dice[i].Animation = 0;
-                // ’вЋ~‚µ‚Ѕ–К‚рђЭ’и
+                // еЃњж­ўгЃ—гЃџйќўг‚’иЁ­е®љ
                 dice[i].targetFace = rand() % 6 + 1;
                 snprintf(diceStatus[i], sizeof(diceStatus[i]), "Dice %d: Face %d", i + 1, dice[i].targetFace); 
                 if (dice[0].Animation == 0 && dice[1].Animation == 0 && dice[2].Animation == 0)
                 {
                     money += tintiro(dice[0].targetFace, dice[1].targetFace, dice[2].targetFace, bet);
-                    printf("ѓ_ѓCѓX‚P;%d   ѓ_ѓCѓX‚Q;%d   ѓ_ѓCѓX‚R;%d   ѓXѓRѓA;%d\n", dice[0].targetFace, dice[1].targetFace, dice[2].targetFace, tintiro(dice[0].targetFace, dice[1].targetFace, dice[2].targetFace, bet));
-                    bet = 0; // ѓxѓbѓgЉz‚рѓЉѓZѓbѓg
+                    printf("гѓЂг‚¤г‚№пј‘;%d   гѓЂг‚¤г‚№пј’;%d   гѓЂг‚¤г‚№пј“;%d   г‚№г‚іг‚ў;%d\n", dice[0].targetFace, dice[1].targetFace, dice[2].targetFace, tintiro(dice[0].targetFace, dice[1].targetFace, dice[2].targetFace, bet));
+                    bet = 0; // гѓ™гѓѓгѓ€йЎЌг‚’гѓЄг‚»гѓѓгѓ€
                 }
             }
         }
         else 
         {
-            // ’вЋ~‚·‚й–К‚Й‘О‰ћ‚·‚йЉp“x‚рђЭ’и
+            // еЃњж­ўгЃ™г‚‹йќўгЃ«еЇѕеїњгЃ™г‚‹и§’еє¦г‚’иЁ­е®љ
             double targetAngleX, targetAngleY, targetAngleZ;
             setTargetAngles(dice[i].targetFace, &targetAngleX, &targetAngleY, &targetAngleZ);
-            // ѓCЃ[ѓWѓ“ѓOЉЦђ”‚рЋg‚Б‚ДЉp“x‚р‚И‚Я‚з‚©‚Й€ЪЌs
+            // г‚¤гѓјг‚ёгѓіг‚°й–ўж•°г‚’дЅїгЃЈгЃ¦и§’еє¦г‚’гЃЄг‚Ѓг‚‰гЃ‹гЃ«з§»иЎЊ
             double easing = 0.007; 
             dice[i].RotAngleX += (targetAngleX - dice[i].RotAngleX) * easing;
             dice[i].RotAngleY += (targetAngleY - dice[i].RotAngleY) * easing;
             dice[i].RotAngleZ += (targetAngleZ - dice[i].RotAngleZ) * easing;
-            double gap = 20; // и‡’l
-            if (fabs(dice[i].RotAngleX - targetAngleX) < gap && fabs(dice[i].RotAngleY - targetAngleY) < gap && fabs(dice[i].RotAngleZ - targetAngleZ) < gap)//fabs‚Еђв‘О’l
+            double gap = 20; // й–ѕеЂ¤
+            if (fabs(dice[i].RotAngleX - targetAngleX) < gap && fabs(dice[i].RotAngleY - targetAngleY) < gap && fabs(dice[i].RotAngleZ - targetAngleZ) < gap)//fabsгЃ§зµ¶еЇѕеЂ¤
             {
                 dice[i].Speed = 0;
                 dice[i].RotAngleX = targetAngleX;
                 dice[i].RotAngleY = targetAngleY;
                 dice[i].RotAngleZ = targetAngleZ;
             }
-            else //ѓ^Ѓ[ѓQѓbѓg‚Й‚И‚Б‚Ѕ–К‚МЉp“xЃE‘¬“x‚Й‚ж‚Б‚Д‹O“№ЏCђі
+            else //г‚їгѓјг‚Ігѓѓгѓ€гЃ«гЃЄгЃЈгЃџйќўгЃ®и§’еє¦гѓ»йЂџеє¦гЃ«г‚€гЃЈгЃ¦и»ЊйЃ“дї®ж­Ј
             {
                 if (dice[i].RotAngleX < targetAngleX)
                     dice[i].RotAngleX += fabs(dice[i].Speed);
@@ -414,31 +414,31 @@ void keyboard(unsigned char key, int x, int y)
         eyeZ += P;
         centerZ += P;
         break;
-    case 'r'://ѓTѓCѓRѓЌ‚М–Ъ‚рЏ‰Љъ’l‚Й‚·‚й
+    case 'r'://г‚µг‚¤г‚ігѓ­гЃ®з›®г‚’е€ќжњџеЂ¤гЃ«гЃ™г‚‹
         init();
         break;
-    case 'o': // 'o'ѓLЃ[‚Є‰џ‚і‚к‚ЅЏкЌ‡ЃA4, 5, 6 ‚µ‚©Њ»‚к‚И‚ўѓTѓCѓRѓЌ‚ЙђЭ’и
+    case 'o': // 'o'г‚­гѓјгЃЊжЉјгЃ•г‚ЊгЃџе ґеђ€гЂЃ4, 5, 6 гЃ—гЃ‹зЏѕг‚ЊгЃЄгЃ„г‚µг‚¤г‚ігѓ­гЃ«иЁ­е®љ
         for (int i = 0; i < 3; i++) 
         {
-            dice[i].targetFace = (rand() % 3) + 4; // 4, 5, 6 ‚М‚ў‚ё‚к‚©‚рђЭ’и
+            dice[i].targetFace = (rand() % 3) + 4; // 4, 5, 6 гЃ®гЃ„гЃљг‚ЊгЃ‹г‚’иЁ­е®љ
             snprintf(diceStatus[i], sizeof(diceStatus[i]), "Dice %d: Face %d", i + 1, dice[i].targetFace);
-            // ’вЋ~‚·‚й–К‚Й‘О‰ћ‚·‚йЉp“x‚рђЭ’и
+            // еЃњж­ўгЃ™г‚‹йќўгЃ«еЇѕеїњгЃ™г‚‹и§’еє¦г‚’иЁ­е®љ
             double targetAngleX, targetAngleY, targetAngleZ;
             setTargetAngles(dice[i].targetFace, &targetAngleX, &targetAngleY, &targetAngleZ);
 
-            // –Ъ•WЉp“x‚ЙѓTѓCѓRѓЌ‚р‰с“]
+            // з›®жЁ™и§’еє¦гЃ«г‚µг‚¤г‚ігѓ­г‚’е›ћи»ў
             dice[i].RotAngleX = targetAngleX;
             dice[i].RotAngleY = targetAngleY;
             dice[i].RotAngleZ = targetAngleZ;
             if (i == 2)
             {
-                printf("ѓ_ѓCѓX‚P;%d   ѓ_ѓCѓX‚Q;%d   ѓ_ѓCѓX‚R;%d   ѓXѓRѓA;%d\n", dice[0].targetFace, dice[1].targetFace, dice[2].targetFace, tintiro(dice[0].targetFace, dice[1].targetFace, dice[2].targetFace, bet));
+                printf("гѓЂг‚¤г‚№пј‘;%d   гѓЂг‚¤г‚№пј’;%d   гѓЂг‚¤г‚№пј“;%d   г‚№г‚іг‚ў;%d\n", dice[0].targetFace, dice[1].targetFace, dice[2].targetFace, tintiro(dice[0].targetFace, dice[1].targetFace, dice[2].targetFace, bet));
             }
         }
 
-        // ѓ`ѓ“ѓ`ѓЌѓЉѓ“‚Мѓ‹Ѓ[ѓ‹‚ЙЏ]‚ўЏЉЋќ‹а‚р‘ќЊё
+        // гѓЃгѓігѓЃгѓ­гѓЄгѓігЃ®гѓ«гѓјгѓ«гЃ«еѕ“гЃ„ж‰ЂжЊЃй‡‘г‚’еў—жё›
         money += tintiro(dice[0].targetFace, dice[1].targetFace, dice[2].targetFace, bet);;
-        bet = 0; // ѓxѓbѓgЉz‚рѓЉѓZѓbѓg
+        bet = 0; // гѓ™гѓѓгѓ€йЎЌг‚’гѓЄг‚»гѓѓгѓ€
         break;
     }
     glutPostRedisplay();
@@ -448,36 +448,36 @@ void mouse(int button, int state, int x, int y)
 {
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) 
     {
-        // ѓ}ѓEѓX‚МЌА•WЋж“ѕ
+        // гѓћг‚¦г‚№гЃ®еє§жЁ™еЏ–еѕ—
         float mouseX = (float)x / glutGet(GLUT_WINDOW_WIDTH) * 2 - 1;
         float mouseY = 1 - (float)y / glutGet(GLUT_WINDOW_HEIGHT) * 2;
 
-        // ѓXѓ^Ѓ[ѓgѓ{ѓ^ѓ“‚МѓNѓЉѓbѓN”»’и
+        // г‚№г‚їгѓјгѓ€гѓњг‚їгѓігЃ®г‚ЇгѓЄгѓѓг‚Їе€¤е®љ
         if (mouseX >= buttonX && mouseX <= buttonX + buttonWidth && mouseY >= buttonY && mouseY <= buttonY + buttonHeight) 
         {
-            // ‰с“]‚рЉJЋn
+            // е›ћи»ўг‚’й–‹е§‹
             for (int i = 0; i < 3; i++) 
             {
                 dice[i].Animation = 1;
-                dice[i].Speed = (rand() % 10 + 2) * 3; // ѓ‰ѓ“ѓ_ѓЂ‚И‘¬“xђЭ’иЃi6.0 - 36.0Ѓj
-                dice[i].directionX = (rand() % 2) * 2 - 1; // -1 ‚Ь‚Ѕ‚Н 1
-                dice[i].directionY = (rand() % 2) * 2 - 1; // -1 ‚Ь‚Ѕ‚Н 1
-                dice[i].directionZ = (rand() % 2) * 2 - 1; // -1 ‚Ь‚Ѕ‚Н 1
+                dice[i].Speed = (rand() % 10 + 2) * 3; // гѓ©гѓігѓЂгѓ гЃЄйЂџеє¦иЁ­е®љпј€6.0 - 36.0пј‰
+                dice[i].directionX = (rand() % 2) * 2 - 1; // -1 гЃѕгЃџгЃЇ 1
+                dice[i].directionY = (rand() % 2) * 2 - 1; // -1 гЃѕгЃџгЃЇ 1
+                dice[i].directionZ = (rand() % 2) * 2 - 1; // -1 гЃѕгЃџгЃЇ 1
                 snprintf(diceStatus[i], sizeof(diceStatus[i]), "Dice %d: Rolling...", i + 1);
             }
         }
 
-        // ѓxѓbѓgѓ{ѓ^ѓ“‚МѓNѓЉѓbѓN”»’и
+        // гѓ™гѓѓгѓ€гѓњг‚їгѓігЃ®г‚ЇгѓЄгѓѓг‚Їе€¤е®љ
         if (mouseX >= betButtonX && mouseX <= betButtonX + betButtonWidth && mouseY >= betButtonY && mouseY <= betButtonY + betButtonHeight) 
         {
             if (money >= 10)
             {
-                bet += 10; // ѓxѓbѓgЉz‚рђЭ’и
-                money -= 10; // ѓxѓbѓgЉz‚рЏЉЋќ‹а‚©‚з€ш‚­
-                drawBet(-0.9, -0.95, bet); // ѓxѓbѓgЉz‚рЌXђV
+                bet += 10; // гѓ™гѓѓгѓ€йЎЌг‚’иЁ­е®љ
+                money -= 10; // гѓ™гѓѓгѓ€йЎЌг‚’ж‰ЂжЊЃй‡‘гЃ‹г‚‰еј•гЃЏ
+                drawBet(-0.9, -0.95, bet); // гѓ™гѓѓгѓ€йЎЌг‚’ж›ґж–°
             }
             else
-                printf("“q‚Ї‚з‚к‚й‚Ё‹а‚Є‚ ‚и‚Ь‚№‚сЃB\n‚±‚к€ИЏг“q‚Ї‚й‚И‚зwindow‚р•В‚¶‚ДЋn‚Я‚©‚з‚в‚и’ј‚µ‚Д‚­‚ѕ‚і‚ў");
+                printf("иі­гЃ‘г‚‰г‚Њг‚‹гЃЉй‡‘гЃЊгЃ‚г‚ЉгЃѕгЃ›г‚“гЂ‚\nгЃ“г‚Њд»ҐдёЉиі­гЃ‘г‚‹гЃЄг‚‰windowг‚’й–‰гЃгЃ¦е§‹г‚ЃгЃ‹г‚‰г‚„г‚Љз›ґгЃ—гЃ¦гЃЏгЃ гЃ•гЃ„");
         }
     }
 }
@@ -488,7 +488,7 @@ int main(int argc, char** argv)
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH);
     glutInitWindowSize(800, 600);
-    glutCreateWindow("“d22Ѓ|0006Ѓ@“V–мЊi‘ѕ");
+    glutCreateWindow("гѓЃгѓігѓЃгѓ­гѓЄгѓі");
     init();
     glutDisplayFunc(display);
     glutKeyboardFunc(keyboard);
